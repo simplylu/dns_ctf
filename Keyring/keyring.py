@@ -41,7 +41,7 @@ def help():
 
 
 def connect_to_keyring() -> SQLeet:
-    return SQLeet(os.path.join(os.environ["SQLEET"], "sqleet"), os.path.join(os.environ["KEYRING"], "keyring.db"), "~^.m)wuit8I3oA)Z<cOS/m0U[;N7HRwbAs.UNW7/")
+    return SQLeet(os.path.join(os.environ["SQLEET"], "sqleet"), os.path.join(os.environ["KEYRING"], "keyring.py"), "~^.m)wuit8I3oA)Z<cOS/m0U[;N7HRwbAs.UNW7/")
 
 
 def check_root():
