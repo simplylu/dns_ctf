@@ -116,7 +116,7 @@ def search():
         return index(msg="At least one query parameter needed")
     parts = text(f" {logic.upper()} ".join(sql_parts)).text
     sql = f"SELECT * FROM customers WHERE {parts};"
-    S = SQLeet(os.path.join(os.environ["SQLEET"], "sqleet"), "customers.db", __fetch_pw_from_keyring())
+    S = SQLeet(os.path.join(os.environ["SQLEET"], "sqleet"), app.config["DB"], __fetch_pw_from_keyring())
     res, ret = S.run(sql)
     if ret == 0:
         stdout = res[0].decode("utf-8")
