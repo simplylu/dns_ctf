@@ -28,7 +28,7 @@ def connect2db() -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
     return (con, cur)
 
 def __fetch_pw_from_keyring() -> str:
-    pw = subprocess.check_output(["python3", os.path.join(os.environ["SQLEET"], "keyring.py"), "get", "system", "customer_db"])
+    pw = subprocess.check_output(["python3", os.path.join(os.environ["KEYRING"], "keyring.py"), "get", "system", "customer_db"])
     if b"Password" in pw:
         pw = pw[10:-1].decode()
         return pw
@@ -52,7 +52,7 @@ def is_admin():
 ALLOWED_QUERIES = ["logic", "firstname", "surname", "username", "email", "city", "district", "postcode", "street", "housenumber", "iban", "bic", "shoppingcart"]
 
 @app.route("/", methods=["GET"])
-def nimda(data: list = [], msg: str = "", dberror: dict = None):
+def index(data: list = [], msg: str = "", dberror: dict = None):
     if is_admin():
         return render_template("nimda.html", role=session["role"], data=data, faces=requests.get(f"https://faceapi.herokuapp.com/faces?n={len(data)}").json(), msg=msg, dberror=dberror)
     else:
@@ -61,7 +61,7 @@ def nimda(data: list = [], msg: str = "", dberror: dict = None):
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if is_authorized():
-        return nimda()
+        return index()
     if request.method == "POST":
         try:
             username = request.form.get("username")
@@ -75,7 +75,7 @@ def login():
                 session["active"] = True
                 session["role"] = "admin"
                 session["userid"] = base64.b32encode("Administrator".encode()).decode()
-                return nimda()
+                return index()
             else:
                 return render_template("login.html", msg="invalid user or password"), 401
         try:
@@ -89,7 +89,7 @@ def login():
                 session["active"] = True
                 session["role"] = role
                 session["userid"] = base64.b32encode(username.encode()).decode()
-                return nimda()
+                return index()
             else:
                 return render_template("login.html", msg="invalid user or password"), 401
         except Exception as e:
@@ -111,7 +111,7 @@ def search():
     try:
         query_string = request.query_string.decode().split("&")
     except:
-        return nimda(msg="Something went wrong")
+        return index(msg="Something went wrong")
     
     sql_parts = []
     logic = ""
@@ -120,7 +120,7 @@ def search():
         key = unquote_plus(key)
         val = unquote_plus(val)
         if key not in ALLOWED_QUERIES:
-            return nimda(msg="Don't try to SQLi or **** me!")
+            return index(msg="Don't try to SQLi or **** me!")
         if key == "logic":
             logic = val
             continue
@@ -136,7 +136,7 @@ def search():
             sql_parts.append(f'{key}="{val}"')
     
     if not sql_parts:
-        return nimda(msg="At least one query parameter needed")
+        return index(msg="At least one query parameter needed")
     parts = text(f" {logic.upper()} ".join(sql_parts)).text
     sql = f"SELECT * FROM customers WHERE {parts};"
     S = SQLeet(os.path.join(os.environ["SQLEET"], "sqleet"), "customers.db", __fetch_pw_from_keyring())
@@ -145,7 +145,7 @@ def search():
         stdout = res[0].decode("utf-8")
         stderr = res[1].decode("utf-8")
         if stderr != '':
-            return nimda(msg="Error, will be fixed soon", dberror={"stdout": res[0], "stderr": res[1]})
+            return index(msg="Error, will be fixed soon", dberror={"stdout": res[0], "stderr": res[1]})
         else:
             data = []
             stdout = stdout[4:].split("\n")
@@ -168,9 +168,9 @@ def search():
                     "bic": line[13],
                     "shoppingcart": json.loads(line[15])
                 })
-            return nimda(data=data)
+            return index(data=data)
     else:
-        return nimda(msg="Error, will be fixed soon", dberror={"stdout": res[0], "stderr": res[1]})
+        return index(msg="Error, will be fixed soon", dberror={"stdout": res[0], "stderr": res[1]})
 
 if __name__ == "__main__":
     # TODO: While loop here or in bash starter?
