@@ -78,22 +78,6 @@ def login():
                 return index()
             else:
                 return render_template("login.html", msg="invalid user or password"), 401
-        try:
-            S = SQLeet(os.path.join(os.environ["SQLEET"], "sqleet"), "customers.db", __fetch_pw_from_keyring())
-            res = S.run(f"""SELECT password,role FROM customers WHERE username="{username}";""")
-            data = res[0][0]
-            if data.decode("utf-8")[4:] == '':
-                return render_template("login.html"), 401
-            pwhash, role = res[0][0][3:-1].decode().split("|")
-            if sha1(password.encode()).hexdigest() == pwhash:
-                session["active"] = True
-                session["role"] = role
-                session["userid"] = base64.b32encode(username.encode()).decode()
-                return index()
-            else:
-                return render_template("login.html", msg="invalid user or password"), 401
-        except Exception as e:
-            return render_template("login.html", msg="something went wrong"), 401
     else:
         return render_template("login.html", msg="invalid request method"), 401
 
