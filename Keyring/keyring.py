@@ -3,6 +3,7 @@ import base64
 from subprocess import Popen, PIPE
 from getpass import getpass
 from os import getuid
+import os
 import sys
 from sqlalchemy import text
 
@@ -40,7 +41,7 @@ def help():
 
 
 def connect_to_keyring() -> SQLeet:
-    return SQLeet("./sqleet-master/sqleet", "keyring.db", "~^.m)wuit8I3oA)Z<cOS/m0U[;N7HRwbAs.UNW7/")
+    return SQLeet(os.path.join(os.environ["KEYRING"], "sqleet"), "keyring.db", "~^.m)wuit8I3oA)Z<cOS/m0U[;N7HRwbAs.UNW7/")
 
 
 def check_root():
