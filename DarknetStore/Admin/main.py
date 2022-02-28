@@ -18,7 +18,8 @@ from sqlalchemy import text
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.urandom(31)
 app.config["DB"] = "customers.db"
-app.debug = True
+app.config["HOST"] = "0.0.0.0"
+app.config["PORT"] = 81
 app.jinja_env.filters['zip'] = zip
 
 def connect2db() -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
@@ -137,11 +138,9 @@ def search():
     if not sql_parts:
         return nimda(msg="At least one query parameter needed")
     parts = text(f" {logic.upper()} ".join(sql_parts)).text
-    # parts = f" {logic.upper()} ".join(sql_parts)
     sql = f"SELECT * FROM customers WHERE {parts};"
     S = SQLeet(os.path.join(os.environ["SQLEET"], "sqleet"), "customers.db", __fetch_pw_from_keyring())
     res, ret = S.run(sql)
-    # print(Fore.RED, res, Fore.RESET)
     if ret == 0:
         stdout = res[0].decode("utf-8")
         stderr = res[1].decode("utf-8")
@@ -174,4 +173,5 @@ def search():
         return nimda(msg="Error, will be fixed soon", dberror={"stdout": res[0], "stderr": res[1]})
 
 if __name__ == "__main__":
-    app.run()
+    # TODO: While loop here or in bash starter?
+    app.run(host=app.config["HOST"], port=app.config["PORT"])
