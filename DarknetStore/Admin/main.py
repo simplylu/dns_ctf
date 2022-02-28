@@ -6,7 +6,6 @@ import subprocess
 import json
 from urllib.parse import unquote_plus
 
-from hashlib import sha1
 from sqleet import SQLeet
 from flask import Flask, render_template, request, session
 from werkzeug.exceptions import Unauthorized
@@ -17,7 +16,7 @@ from sqlalchemy import text
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.urandom(31)
-app.config["DB"] = "customers.db"
+app.config["DB"] = "/opt/DarknetStore/Admin/customers.db"
 app.config["HOST"] = "0.0.0.0"
 app.config["PORT"] = 81
 app.jinja_env.filters['zip'] = zip
