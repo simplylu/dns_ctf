@@ -72,7 +72,7 @@ def login():
             else:
                 return render_template("login.html", msg="invalid user or password"), 401
     else:
-        return render_template("login.html"), 200
+        return render_template("login.html", msg=None), 200
 
 @app.route("/logout", methods=["GET"])
 def logout():
