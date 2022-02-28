@@ -37,12 +37,6 @@ def __fetch_pw_from_keyring() -> str:
         print("Make sure, a key for 'customer_db' exists in 'system'.")
         return ""
 
-def is_authorized():
-    try:
-        return session["active"]
-    except:
-        return False
-
 def is_admin():
     try:
         return session["active"] and session["role"] == "admin"
@@ -60,7 +54,7 @@ def index(data: list = [], msg: str = "", dberror: dict = None):
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if is_authorized():
+    if is_admin():
         return index()
     if request.method == "POST":
         try:
