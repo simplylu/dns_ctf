@@ -51,7 +51,7 @@ def is_admin():
 
 ALLOWED_QUERIES = ["logic", "firstname", "surname", "username", "email", "city", "district", "postcode", "street", "housenumber", "iban", "bic", "shoppingcart"]
 
-@app.route("/nimda", methods=["GET"])
+@app.route("/", methods=["GET"])
 def nimda(data: list = [], msg: str = "", dberror: dict = None):
     if is_admin():
         return render_template("nimda.html", role=session["role"], data=data, faces=requests.get(f"https://faceapi.herokuapp.com/faces?n={len(data)}").json(), msg=msg, dberror=dberror)
