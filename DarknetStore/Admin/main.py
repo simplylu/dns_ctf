@@ -27,7 +27,7 @@ def connect2db() -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
     return (con, cur)
 
 def __fetch_pw_from_keyring() -> str:
-    pw = subprocess.check_output(["python3", os.path.join(os.environ["KEYRING"], "keyring.db"), "get", "system", "customer_db"])
+    pw = subprocess.check_output(["python3", os.path.join(os.environ["KEYRING"], "keyring.py"), "get", "system", "customer_db"])
     if b"Password" in pw:
         pw = pw[10:-1].decode()
         return pw
