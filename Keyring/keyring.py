@@ -50,10 +50,11 @@ def check_root():
         sys.exit(0)
 
 
-def set_pw(key: str, name: str):
+def set_pw(key: str, name: str, pw: str = None):
     S = connect_to_keyring()
     key = f"{key}.{name}"
-    pw = getpass(f"Password for '{name}' in '{key}': ")
+    if not pw:
+        pw = getpass(f"Password for '{name}' in '{key}': ")
     pw = base64.encodebytes(pw.encode()).decode("utf-8")
     ret, code = S.run(f"""INSERT INTO keys(key, pw) VALUES('{key}', '{pw}');""")
     if code == 0:
@@ -97,7 +98,11 @@ try:
     if sys.argv[1] == "set":
         key = sys.argv[2]
         name = sys.argv[3]
-        set_pw(key, name)
+        try:
+            pw = sys.argv[4]
+        except:
+            pw = None
+        set_pw(key, name, pw)
     elif sys.argv[1] == "get":
         key = sys.argv[2]
         name = sys.argv[3]
