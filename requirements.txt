@@ -1,0 +1,6 @@
+Flask==2.0.2
+reportlab==3.6.7
+requests==2.26.0
+SQLAlchemy==1.4.29
+svglib==0.9.3
+Werkzeug==2.0.2

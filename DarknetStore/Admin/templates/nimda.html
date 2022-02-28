@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table class="search">
+        <tr>
+            <td class="headline">
+                <h1>Welcome</h1>
+                <p>Use the search form below to search for users.</p>
+                <p>Use <i class="wildcard">*</i> for wildcards</p>
+                <p>Search may be <b>slow</b> due to strong encryption,<br>as we take PII sirius!!11!111!</p>
+            </td>
+            <td>
+                <div class="matrix">
+                    <div id="container"></div>
+                    <p class="title">Admin Interface</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="col1">
+                <form action="/search" method="GET">
+                    <table>
+                        <tr>
+                            <td>Select query linking logic</td>
+                            <td>
+                                <input value="and" name="logic" id="and" type="radio" checked>
+                                <label for="and">AND</label>
+                                <input value="or" name="logic" id="or" type="radio">
+                                <label for="or">OR</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="firstname">First Name</label></td>
+                            <td><input type="text" name="firstname" placeholder="First name" autocomplete="off"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="surname">Last Name</label></td>
+                            <td><input type="text" name="surname" placeholder="First name" autocomplete="off"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="email">E-Mail</label></td>
+                            <td><input type="text" name="email" placeholder="Email" autocomplete="off"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="city">City</label></td>
+                            <td><input type="text" name="city" placeholder="City" autocomplete="off"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="district">District</label></td>
+                            <td><input type="text" name="district" placeholder="District" autocomplete="off"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="postcode">ZIP</label></td>
+                            <td><input type="text" name="postcode" minlength="4" maxlength="5" placeholder="ZIP" autocomplete="off">
+                        </tr>
+                        <tr>
+                            <td><label for="street">Street</label></td>
+                            <td><input type="text" name="street" placeholder="Street" autocomplete="off"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="housenumber">Housenumber</label></td>
+                            <td><input type="text" name="housenumber" placeholder="Housenumber" autocomplete="off"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="iban">IBAN</label></td>
+                            <td><input type="text" name="iban" placeholder="IBAN" autocomplete="off"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="bic">BIC</label></td>
+                            <td><input type="text" name="bic" placeholder="BIC" autocomplete="off"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="shoppingcart">Shopping cart</label></td>
+                            <td><input type="text" name="shoppingcart" placeholder="Item on shoppingcart" title="wildcard auto-enabled" autocomplete="off"></td>
+                        </tr>
+                    </table>
+                    <button type="submit" class="submit">Search</button>
+                </form>
+                <i class="error">{{ msg }}</i>
+            </td>
+            <td class="col2">
+                {% for customer, face in data|zip(faces) %}
+                <table class="customer">
+                    <tr>
+                        <td class="tblitem" rowspan="2"><img class="profile" src="{{ face['image_url'] }}" alt="This person does not exist"></td>
+                        <td class="tblitem">Name: {{ customer["firstname"] }} - Surname: {{ customer["surname"] }} - Email: <a href="mailto:{{ customer['email'] }}">{{ customer["email"] }}</a> - Phone: {{ customer["phone"] }}
+                            <br>
+                            City: {{ customer["city"] }} - ZIP: {{ customer["zip"] }} - District: {{ customer["district"] }} - Street: {{ customer["street"] }} - House number: {{ customer["housenumber"] }}
+                            <br>
+                            IBAN: {{ customer["iban"] }} - BIC: {{ customer["bic"] }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tblitem"></td>
+                        <td class="tblitem">
+                            <table class="shoppingcart">
+                                <thead>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
+                                </thead>
+                                {% for item in customer["shoppingcart"] %}
+                                    <tr>
+                                        <td>{{ item["name"] }}</td>
+                                        <td>{{ item["price"] }} $USD</td>
+                                        <td>{{ item["amount"] }}x</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+                {% endfor %}
+                {% if dberror != None %}
+                    <b>STDOUT</b>
+                    <i class="error">{{ dberror["stdout"] }}</i>
+                    <br>
+                    <b>STDERR</b>
+                    <i class="error">{{ dberror["stderr"] }}</i>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
+
+<script>
+    const availableChars = "123456780ABCDEFGHIJKLMNOPQRTabcdefghijklmnopqrstuvwxyz";
+
+    function getRandomChar() {
+        return availableChars[Math.random() * availableChars.length | 0];
+    }
+
+    class MatrixStream {
+        constructor(container, len) {
+            this.container = container;
+            this.len = len;
+            this.init();
+        }
+
+        init() {
+            // start from 0, 1, 2
+            this.status = Math.random() * 3 | 0;
+
+            this.pipe = [];
+            this.count = 0;
+
+            // create render
+            this.renderNodes = [];
+            for (let i = 0; i < this.len; i++) {
+                let span = document.createElement('span');
+                span.innerText = getRandomChar();
+                this.container.appendChild(span);
+                this.renderNodes.push(span);
+            }
+        }
+
+        tick() {
+            this.fill();
+            this.render();
+            this.shift();
+        }
+
+        fill() {
+
+            // fill the pipe
+
+            while (this.count < this.len) {
+
+                let node = { code: this.status };
+
+                switch (this.status) {
+                    case 0:
+                        node.length = 1;
+                        break;
+
+                    case 1:
+                        node.length = 1 + Math.random() * this.len / 3 * 2 | 0;
+                        break;
+
+                    case 2:
+                        node.length = 1 + Math.random() * this.len / 3 | 0;
+                        break;
+                }
+
+
+                // switch to next status 0, 1, 2, 0, 1, 2, ...
+                this.status = (this.status + 1) % 3;
+
+                this.count += node.length;
+                this.pipe.push(node);
+            }
+        }
+
+        render() {
+            // render
+
+            let idx = 0;
+            (() => {
+                for (let node of this.pipe) {
+                    for (let i = 0; i < node.length; i++) {
+
+                        if (idx === this.len) return;
+
+                        switch (node.code) {
+
+                            case 0:
+                                // always update char
+                                this.renderNodes[idx].innerText = getRandomChar();
+                                this.renderNodes[idx].className = 'b';
+                                break;
+
+                            case 1:
+                                // has a chance to update char
+                                if (Math.random() < .05) {
+                                    this.renderNodes[idx].innerText = getRandomChar();
+                                }
+                                this.renderNodes[idx].className = 'l';
+                                break;
+
+                            case 2:
+                                this.renderNodes[idx].className = 'd';
+                                break;
+                        }
+
+
+                        idx++;
+                    }
+                }
+            })();
+        }
+
+        shift() {
+
+            if (! --this.pipe[0].length) {
+                this.pipe.shift();
+            }
+
+            this.count--;
+        }
+    }
+    const columns = 106;
+    const rows = 28;
+    const matrix = [];
+
+    let container = document.getElementById('container');
+    for (let i = 0; i < columns; i++) {
+        let column = document.createElement('div');
+        column.className = 'column';
+        container.appendChild(column);
+        let matrix = new MatrixStream(column, rows);
+
+        setInterval(function loop() {
+            matrix.tick();
+        }, 100 + Math.random() * 100);
+    }
+</script>
+
+<style>
+    @font-face {
+        font-family: "nasalization-rg";
+        src: url("/static/fonts/nasalization-rg.otf");
+    }
+
+    body {
+        background-color: black;
+        color: green;
+        font-family: "nasalization-rg";
+        overflow-x: hidden;
+    }
+
+    .search {
+        width: 100%;
+        justify-content: left;
+        border: 1px solid black;
+    }
+
+    form {
+        width: auto;
+        border-right: 1px solid black;
+    }
+
+    .col1 {
+        width: 33%;
+        vertical-align: top;
+        border-bottom: 1px solid rgb(9, 122, 122);
+    }
+
+    .col2 {
+        position: absolute;
+        overflow-x: hidden;
+        top: 20% !important;
+        height: 75%;
+        width: 66%;
+        overflow-y: scroll;
+        /* vertical-align: top; */
+        border-left: 1px solid rgb(9, 122, 122);
+    }
+
+    .col2::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .col2::-webkit-scrollbar-track {
+        background-color: black;
+        border: 1px solid rgb(9, 122, 122);
+    }
+
+    .col2::-webkit-scrollbar-thumb {
+        background: transparent;
+        border-bottom: 1px solid rgb(9, 122, 122);
+        border-top: 1px solid rgb(9, 122, 122);
+    }
+
+    .col2::-webkit-scrollbar-thumb:hover {
+        background: rgb(9, 122, 122);
+    }
+
+    .col2::-webkit-scrollbar-thumb:scroll {
+        background: rgb(9, 122, 122);
+    }
+
+    input {
+        margin: 5px;
+        background-color: transparent;
+        color: cyan;
+        outline: none;
+        border: none;
+        border-bottom: 1px dotted rgb(9, 122, 122);
+        font-family: "nasalization-rg";
+    }
+
+    input::placeholder {
+        color: rgb(6, 82, 6);
+    }
+
+    .tblitem {
+        padding-left: 15px;
+        float: left;
+    }
+
+    a {
+        color: cyan;
+    }
+
+    hr {
+        border-color: rgb(9, 122, 122);
+    }
+
+    .profile {
+        margin-left: 30px;
+        height: 80px;
+        justify-self: right;
+    }
+
+    .matrix {
+        position: absolute;
+        top: 10px !important;
+        width: 66%;
+        height: 15%;
+    }
+
+    .headline {
+        height: 15% !important;
+        border-bottom: 1px solid rgb(9, 122, 122);
+    }
+
+    .customer {
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+
+    /* Matrix Styles */
+    #container {
+        left: 0%;
+        width: 100%;
+        height: 4%;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        text-align: center;
+    }
+
+    .column {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .column span {
+        display: inline-block;
+        width: 12px;
+        font-size: 10px;
+        line-height: 9px;
+    }
+
+    .b {
+        /* .bright { */
+        color: white;
+    }
+
+    .l {
+        /* .light { */
+        color: #00DD00;
+    }
+
+    .d {
+        /* .dark { */
+        color: #004400;
+    }
+    .title {
+        position: absolute;
+        left: 5%;
+        color: red;
+        font-size: 42px;
+    }
+    .shoppingcart {
+        border:1px dotted rgb(9, 122, 122);
+        font-family: Arial, Helvetica, sans-serif;
+        float: right;
+    }
+    .wildcard {
+        color: red;
+    }
+    .submit {
+        background-color: transparent;
+        color: green;
+        border: none;
+        font-size: 16px;
+        border-radius: 6px;
+        border: 1px solid green;
+        float: right;
+        cursor: pointer;
+        margin: 5px;
+    }
+    .error {
+        color: red;
+    }
+</style>
