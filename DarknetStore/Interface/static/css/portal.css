@@ -1,6 +1,11 @@
 @charset "utf-8";
+
+@font-face {
+  font-family: "nasalization-rg";
+  src: url("/static/fonts/nasalization-rg.otf");
+}
+
 body {
-	font: 100%/1.4 Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
 	background-color: #1A1A1A;
 	margin: 0;
 	padding: 0;
@@ -28,7 +33,6 @@ p {
   color: #FFFFFF;
   padding-left: 30px;
   font-size: 15px;
-  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;;
 }
 
 
