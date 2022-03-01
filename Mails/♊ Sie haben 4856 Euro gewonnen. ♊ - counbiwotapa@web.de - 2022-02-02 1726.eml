@@ -1,0 +1,165 @@
+Return-Path: <counbiwotapa@web.de>
+Authentication-Results:  mqgmx026.server.lan; dkim=pass header.i=@web.de
+Received: from mout-xforward.web.de ([82.165.159.4]) by mx-ha.gmx.net
+ (mxgmx003 [212.227.15.9]) with ESMTPS (Nemesis) id 1MjjOj-1mUfEu0qBn-00lBPY
+ for <Administrator@darknetshop.com>; Wed, 02 Feb 2022 17:26:03 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
+	s=dbaedf251592; t=1643819161;
+	bh=/JyhUHftu125x/JTOw+ENaSPetnXuVRKZ82FnscUmG4=;
+	h=X-UI-Sender-Class:From:To:Subject:Date;
+	b=ZvAHBWRJcXz5tO+sytd1hU/7de1Yw5zqFH806DzF1PNdGjjgNi4dGKSV1VeBXKLn9
+	 gvFb//m1AdJQs0v/3a2A1YwjNYQFC43OB7j3u7RZLI3wFCJ8gMCOYuGitunLuQjbz5
+	 vYayvhLWqlSEcfj1gNoVf9qiEfYmQaY+FH7f+/b4=
+X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
+Received: from [46.8.110.248] ([46.8.110.248]) by web-mail.web.de
+ (3c-app-webde-bs16.server.lan [172.19.170.16]) (via HTTP); Wed, 2 Feb 2022
+ 17:26:01 +0100
+MIME-Version: 1.0
+Message-ID: <trinity-c658aa2d-20c7-492e-b09e-583976cd957a-1643819161571@3c-app-webde-bs16>
+From: counbiwotapa@web.de
+To: j.geese@freenet.de
+Subject: =?UTF-8?Q?=E2=99=8A_Sie_haben_4856_Euro_gewonnen=2E_=E2=99=8A?=
+Content-Type: text/html; charset=UTF-8
+Date: Wed, 2 Feb 2022 17:26:01 +0100
+Importance: normal
+Sensitivity: Normal
+X-Priority: 3
+X-Provags-ID: V03:K1:7+ngWCQCw5IEaWuQf4MDM8WfJISYVp+yHH0YumMCGbxodF8T+bdACS/QLJ0RESuj43BWR
+ 3tf2GoyXQxJxwtIFlxzFymz8TfMSNDeJ/JGNrsYFYJ8oUHUq0S5Kl1eLTdj5fJtqPKrc4qcWSUXG
+ fVcDTFrepxoX9CQrspAwa7SWO/fIs1wHTW3WyKtYNquH26StvnRnfheAh3y2LNQj5p9UthXXOkVn
+ V3pDVtdUN0HSjkleFkdqkbvAJWK0gztgM08Yh1acLWy+9Ix+Tez0eSmneBn0Dl2bVx8DDVJEmnDT
+ kA=
+X-Spam-Flag: YES
+X-UI-Out-Filterresults: junk:10;V03:K0:2he5NltcWTM=:1JBBmWdiFTjdSEIt560G9Pdo
+ B6opFZFTt5j2YyCKJcP985LAqjAGWMbOjBqubBLS/wZXq60zaouboXebeEskiOApPB8/Yf/dB
+ NnNYYHGu9QsA2R+YQiXAf8m9gmS3wle5YogCjdL2E1O85r71gUlh+bznsp7twS7BfDYA6Xbgc
+ X31Ten77MgOHH6/c+lBuYZuvDpBr0REO7dihrBdAkmvP0WvfKWTc9+qqLjP9tjvhYlmxYK+hB
+ DlxIDSkUdtCqpRQYZbPUq+wM/BBk3ryC1K5/z85Swjfe8TnPhw2AfSpAGTkYNTgLsIDHEHiBe
+ zN19opFFbW1yhKbgq6XvBla7FeNMYeEJ3UGnHzSR2U39QQdJH3xo+gmoMrRmrppK2IIgjx0sV
+ aMD8RXRc7LBCIzEl9gbb8ntgKsV5i6gOejO4NaTmhmTu0OmNNjtIhdVknifSPEHXaV4LDe436
+ L59/SdzN6uxs0dFWTvr1ZSf/4P3k26p28tCCxj/KIU910bb1wvtgWoGBG9hfMmIH1obPFBDHC
+ 1Pg79mpcBjbPThlOX53uXAZnGnFZ94zCXs2DQjRHWNo6DFvPs6hrT3hSHXwiCwxEBezOJVBh0
+ VdDZT4T0Z+K0rSuM0tskBKFcuSIG5nXenwsUSKpu2eTmN4AQ3FlzKMLKpstwP8cGZmCk6FbmM
+ sRlfL98yilCN3vCQtC33I2byfTKjxtbTZ1oSBQ7EGBsRmF9cacwarf6PAsbOc44xWOBJLEweU
+ jtYKYXG55T5BrqzZX9lHk5BNJro5msY3+xaPQjIHca66UfFsz2l1scok1u0InO7wefJL9llo/
+ uiQQaP5irivN1kdLUpViExo1CrynuOKAECAnlkMHFW7zD+BtjebAzNoC2VdF7+a2drKJ3olyI
+ L6Od9Z2MPKkkMflcqIJdkJ9OZ8FJ8HEndnDLoWY=
+Envelope-To: <Administrator@darknetshop.com>
+X-GMX-Antispam: 5 (nemesis mail header analyzer); Detail=V3;
+X-Spam-Flag: YES
+X-UI-Filterresults: junk:10;V03:K0:lPsOp1hvp0c=:GYCeqEesjV1KneKn+tknnoFwbfWG
+ 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
+ vBU2jNBlJlS/RDD/Ho22I=
+
+<html><head></head><body><div style="font-family: Verdana;font-size: 12.0px;"><p>Hallo!</p>
+
+<p>&#9802; Sie haben 4856 Euro gewonnen. &#9802;</p>
+
+<p><a href="https://dsdefgdvsdvsdv.page.link/Qg5Q">Erfahren Sie mehr</a>...</p>
+
+<div style="display: none">Ein wort mit f&uuml;nf buchstaben dachte langdon und hielt sich die unermessliche zahl alter w&ouml;rter vor augen die als wort der weisheit gelten mochten w&ouml;rter aus mystischen ges&auml;ngen aus astrologischen prophezeiungen aus den initiationsriten und einweihungszeremonien der geheimgesellschaften aus wicca ritualen aus alt&auml;gyptischen bannfl&uuml;chen aus heidnischen mantras die liste war endlos</div></div></body></html>

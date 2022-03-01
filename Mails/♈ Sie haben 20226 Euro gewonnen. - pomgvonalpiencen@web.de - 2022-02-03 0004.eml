@@ -1,0 +1,182 @@
+Return-Path: <pomgvonalpiencen@web.de>
+Authentication-Results:  mqgmx029.server.lan; dkim=pass header.i=@web.de
+Received: from mout-xforward.web.de ([82.165.159.35]) by mx-ha.gmx.net
+ (mxgmx017 [212.227.15.9]) with ESMTPS (Nemesis) id 1MTgx5-1mniEk49cr-00TzKQ
+ for <Administrator@darknetshop.com>; Thu, 03 Feb 2022 00:04:24 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
+	s=dbaedf251592; t=1643843062;
+	bh=mn/yUOIkaPpF3d3Y8YzA+jhE1p2z4IaDV0i1LwikYPs=;
+	h=X-UI-Sender-Class:From:To:Subject:Date;
+	b=VvwzfxWAq7gzrspvi9Ub7hq9YzPqxFATkE2MkYBpP887K0L+eTd41cJkgd/H+g6KX
+	 2zXFUrl7HEFwTNeDT5AGN+kQF3p2wWW4cXb8p6+/EVDwXq0WdQEYgZXhF2JMM9nqq3
+	 tpRsC7F7nqJJq5Ai8Fb8M6bFF+xdLMVUspBIkoGg=
+X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
+Received: from [109.248.128.130] ([109.248.128.130]) by web-mail.web.de
+ (3c-app-webde-bap26.server.lan [172.19.172.26]) (via HTTP); Thu, 3 Feb 2022
+ 00:04:22 +0100
+MIME-Version: 1.0
+Message-ID: <trinity-91f7712c-26f6-482b-b97d-fc0b7de141c2-1643843062493@3c-app-webde-bap26>
+From: pomgvonalpiencen@web.de
+To: v.mattner@freenet.de
+Subject: =?UTF-8?Q?=E2=99=88_Sie_haben_20226_Euro_gewonnen=2E?=
+Content-Type: text/html; charset=UTF-8
+Date: Thu, 3 Feb 2022 00:04:22 +0100
+Importance: normal
+Sensitivity: Normal
+Content-Transfer-Encoding: quoted-printable
+X-Priority: 3
+X-Provags-ID: V03:K1:0SGi0hXjU5OIugP6BjcwxLQd6LEvKzG2RID9x5HyQZlw9Rh6yz98oOrckPGCLiGrWO5MI
+ OA1NStSsquMhVjzF+OxMr5f1mdpnIOdiju9IawkViqibpcprPjmNao/DsaCpLX/GAVjTWmrOdhJ4
+ b4LiGfYh6vth3GAQTq390lSDNYJzzR6zTigtMm4x36kRLlOdNaajkT6q1RL8ErqY5UIPjVJEgz3q
+ 3b339kFOnqVceXav2e/lKrzHQr7UYHolb6WlKSqmvIgbBS9a3yp7G77cYF8GReSNhAzJF0ZtgORM
+ aE=
+X-Spam-Flag: YES
+X-UI-Out-Filterresults: junk:10;V03:K0:DP/yBsjc4SM=:1WJibWE80ehATs0OkiFnTfLC
+ kJZBuK2MZarIVo4Wuvbgo/Tmv0KFGJWiwdkZvBnlTdqNL1VfRZfIAqZTeikqCbfvld4hB1gqf
+ zwT45zc1HBDmpWAZIBHadM8q09kxwqo5+VWiW06DX96+ANUcN+osurU/4mlK57hIKTgnPuWIe
+ z3TMTjaEHozh86VEA3zW192IQO/fIaySp2Z2R/+ok6HoMF4Q8GIaUAQL3GrR9+aiNB0TEJbN9
+ DiqHA5jnWrChszRllA0tTDjBRHWKlwA/j4FcSVK/4cOpz7zhK9Y+qpR+D10ORkpFMjFOMwYGN
+ 5lKCt3anS4LgMgYTkNwc0L0qTb7fWCraT/p5ZhjV+xR7faLExpfxK5MJUaVcX/ismdLUm9hHV
+ DPSNUJmnh6PC5OjpM4lytplrwtZCSKdBUU2rT3qHncMbT3khyvGbxMEmpysvy0hnjeCaYCGMz
+ CEEhNDKUPvIa4ggv1C9HGQd7HAKzuHDV+QdPymisS0NL1pls2w1JidCbZ7h+59OCd1h3PEC1Q
+ nrj0fLnR9vNtcknn/daOraIdX6oc/NH8UXV+/UovGIemczcZ+7M3xxe/8zhVSSMTdSD14GOJy
+ ugtwXAdsi1PDhK0MrWhOMsBxC2MgaPS951O3jzzLtmAQPXnmbIunGATSR+P8oH29IvcHv09pl
+ H3ANTD5GDU9giq13ZAOVC3suEQlpJQtzh/McZzLlgGcw/QMd/KSnouAYKSZRm2eBUTfl87EA5
+ yVm5X1G0i99iNIDbsnLzsIZ8esZl+Y4qSNsgNdY389QQMOaxFy3T6Ow/kyKNyq4s79nqCDqAd
+ m0pmYkJpn8wtgOWaK2Z9pXVdXd2hyWGK1KOslPUg8feYFJbK69adfB9dybZsCckHHmio4ALkR
+ /Rw+xt2iD1vlmmK4Avnaj6thxOKYcycxMTvTG3A=
+Envelope-To: <Administrator@darknetshop.com>
+X-GMX-Antispam: 5 (nemesis mail header analyzer); Detail=V3;
+X-Spam-Flag: YES
+X-UI-Filterresults: junk:10;V03:K0:Ex7m1h7xFg4=:8QkV4VO5tEGkhwW78W/5y0gk8ydN
+ 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
+
+<html><head></head><body><div style=3D"font-family: Verdana;font-size: 12=
+=2E0px;"><p>Hallo!</p>
+
+<p>&#9800; Sie haben 20226 Euro gewonnen=2E</p>
+
+<p><a href=3D"https://usefrsefimdsfsdfg=2Epage=2Elink/yded">Details hier</=
+a>=2E</p>
+
+<div style=3D"display: none">Aus diesem grund br&uuml;teten die gralssuche=
+r bis heute &uuml;ber da vincis nachlass und hofften in seinen notizb&uuml;=
+chern und kunstwerken einen versteckten hinweis auf den ort zu entdecken an=
+ dem der gral schlummerte manche waren der ansicht der berghintergrund der =
+felsgrottenmadonna entspreche der topographie einiger von h&ouml;hlen durch=
+zogener h&uuml;gelketten in schottland andere hielten die auff&auml;llige p=
+latzierung der j&uuml;nger auf dem fresko vom letzten abendmahl f&uuml;r ei=
+ne verschl&uuml;sselte botschaft wieder andere behaupteten r&ouml;ntgenaufn=
+ahmen h&auml;tten gezeigt dass diemona lisa urspr&uuml;nglich eine lapislaz=
+uli brosche mit einer isisdarstellung getragen habe die von da vinci sp&aum=
+l;ter &uuml;bermalt worden sei langdon hatte f&uuml;r diese behauptung nie =
+einen beweis gesehen und konnte sich auch keine verbindung zwischen einer i=
+sisbrosche und dem heiligen gral vorstellen doch die gralssucher diskutiert=
+en diese frage im internet noch immer bis zum &uuml;berdruss</div></div></b=
+ody></html>
