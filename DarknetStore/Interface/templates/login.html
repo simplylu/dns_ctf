@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="main-wrap">
+        <h1 title="Don't be that curious...">Customer Panel</h1>
+        <div class="login-main">
+            <form action="/login" method="post">
+                <input name="username" type="text" placeholder="username" class="box1 border1" autocomplete="off">
+                <input name="password" type="password" placeholder="password" class="box1 border2" autocomplete="off">
+                <input type="submit" class="send" value="Go">
+                <br>
+                <i class="error">{{ msg }}</i>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+<style>
+    @font-face {
+        font-family: "nasalization-rg";
+        src: url("/static/fonts/nasalization-rg.otf");
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        text-decoration: none;
+        outline: none;
+    }
+
+    body,
+    a {
+        font-size: 14px;
+        font-weight: normal;
+        color: green;
+        font-family: "nasalization-rg" !important;
+    }
+
+    .main-wrap {
+        background: black;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+
+    .login-main {
+        width: 300px;
+        height: 100px;
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #004149;
+        padding: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    .login-main p {
+        text-indent: 10px;
+    }
+
+    .box1 {
+        background-color: black;
+        height: 40px;
+        text-indent: 10px;
+        width: 90%;
+        margin-bottom: 2px;
+        color: green;
+        font-size: 15px;
+        font-weight: 400;
+        font-family: "nasalization-rg";
+    }
+
+    .box1::placeholder {
+        color: green;
+    }
+
+    .border1 {
+        -webkit-border-radius: 5px 5px 0 0;
+        -moz-border-radius: 5px 5px 0 0;
+        -ms-border-radius: 5px 5px 0 0;
+        -o-border-radius: 5px 5px 0 0;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .border2 {
+        -webkit-border-radius: 0px 0 5px 5px;
+        -moz-border-radius: 0px 0 5px 5px;
+        -ms-border-radius: 0px 0 5px 5px;
+        -o-border-radius: 0px 0 5px 5px;
+        border-radius: 0px 0 5px 5px;
+    }
+
+    .send {
+        width: 60px;
+        height: 60px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        border-radius: 50%;
+        position: absolute;
+        right: 9px;
+        top: 20px;
+        border: 5px solid #004149;
+        background: #003135;
+        font-size: 18px;
+        color: white;
+        font-weight: normal;
+        text-shadow: 1px 1px 2px #004149;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .send:hover {
+        animation: spin 0.3s ease-in-out;
+        -webkit-animation: spin 0.3s ease-in-out;
+        -moz-animation: spin 0.3s ease-in-out;
+        -ms-animation: spin 0.3s ease-in-out;
+        -o-animation: spin 0.3s ease-in-out;
+        cursor: pointer;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @-webkit-keyframes spin {
+        from {
+            -webkit-transform: rotate(0deg);
+        }
+        /* @admin: If you don't know your credentials anymore, you are either stupid xor a hopeless case...
+         * Here's a hint: RU\\tot}
+         */
+        to {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @-moz-keyframes spin {
+        from {
+            -moz-transform: rotate(0deg);
+        }
+
+        to {
+            -moz-transform: rotate(360deg);
+        }
+    }
+
+    @-o-keyframes spin {
+        from {
+            -o-transform: rotate(0deg);
+        }
+
+        to {
+            -o-transform: rotate(360deg);
+        }
+    }
+    h1 {
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -50%);
+        animation: title 1s infinite;
+    }
+
+    @keyframes title {
+        0% {
+            text-shadow: 0 0 1px green;
+        }
+        50% {
+            text-shadow: 0 0 10px rgb(9, 87, 9);
+        }
+        100% {
+            text-shadow: 0 0 1px green;
+        }
+    }
+
+    .error {
+        color: red;
+    }
+</style>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Mails</title>
+</head>
+<body>
+    <h2>Congrats...</h2>
+    <h3>You've found my worst secrets!</h3>
+    <ul>
+    {% for email in emails %}
+        {% if email == "support.eml" %}
+            <li class="suрport"><a href="/mail/{{ email }}">{{ email }}</a></li>
+        {% else %}
+            <li class="support"><a href="/mail/{{ email }}">{{ email }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+</body>
+</html>
+
+<style>
+    .support {
+        display: block;
+    }
+    .suрport {
+        display: none;
+    }
+</style>
