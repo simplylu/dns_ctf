@@ -3,7 +3,6 @@ import base64
 import os
 import subprocess
 
-from hashlib import sha1
 from sqleet import SQLeet
 from flask import Flask, redirect, render_template, request, session
 from typing import Tuple
@@ -25,16 +24,6 @@ def connect2db() -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
     cur = con.cursor()
     return (con, cur)
 
-def __fetch_pw_from_keyring() -> str:
-    pw = subprocess.check_output(["python3", os.path.join(os.environ["KEYRING"], "keyring.py"), "get", "system", "customer_db"])
-    if b"Password" in pw:
-        pw = pw[10:-1].decode()
-        return pw
-    else:
-        print("Password could not be fetched from keyring.")
-        print("Make sure, a key for 'customer_db' exists in 'system'.")
-        return ""
-
 def is_authorized():
     try:
         return session["active"]
@@ -52,7 +41,7 @@ ALLOWED_QUERIES = ["logic", "firstname", "surname", "username", "email", "city",
 @app.route("/", methods=["GET"])
 def index():
     if is_authorized():
-        return render_template("index.html", role=session["role"], userid=session["userid"])
+        return render_template("portal.html", role=session["role"], userid=session["userid"])
     else:
         return render_template("login.html")
 
@@ -68,31 +57,15 @@ def login():
             return render_template("login.html", msg="invalid request data"), 401
         if not (username and password):
             return render_template("login.html", msg="invalid request data"), 401
-        if username == "Administrator":
-            if password == "hoffnung!":
-                session["active"] = True
-                session["role"] = "admin"
-                session["userid"] = base64.b32encode("Administrator".encode()).decode()
-                return index()
-            else:
-                return render_template("login.html", msg="invalid user or password"), 401
-        try:
-            S = SQLeet("sqleet-master/sqleet", "customers.db", __fetch_pw_from_keyring())
-            res = S.run(f"""SELECT password,role FROM customers WHERE username="{username}";""")
-            data = res[0][0]
-            if data.decode("utf-8")[4:] == '':
-                return render_template("login.html"), 401
-            pwhash, role = res[0][0][3:-1].decode().split("|")
-            print(password, pwhash)
-            if sha1(password.encode()).hexdigest() == pwhash:
-                session["active"] = True
-                session["role"] = role
-                session["userid"] = base64.b32encode(username.encode()).decode()
-                return index()
-            else:
-                return render_template("login.html", msg="invalid user or password"), 401
-        except Exception as e:
-            return render_template("login.html", msg="something went wrong"), 401
+        if username == "Administrator" and password == "hoffnung!":
+            session["active"] = True
+            session["role"] = "admin"
+            session["userid"] = base64.b32encode("Administrator".encode()).decode()
+            return index()
+        elif username == "Armida.Strauss" and password == "THURASOE07":
+            session["active"] = True
+            session["role"] = "user"
+            session["userid"] = base64.b32encode("Armida.Strauss".encode()).decode()
     else:
         return render_template("login.html", msg="invalid request method"), 401
 
@@ -132,7 +105,7 @@ def settings():
                     username = base64.b32decode(userid.encode()).decode()
                 except:
                     return "Userid has wrong format", 500
-                S = SQLeet(os.path.join(os.environ["SQLEET"], "sqleet"), "customers.db", __fetch_pw_from_keyring())
+                S = SQLeet(os.path.join(os.environ["SQLEET"], "sqleet"), os.path.join(os.environ["INTERFACE"], "customers.db"), "secret")
                 res = S.run(f"""SELECT * FROM customers WHERE username="{username}";""")
                 if res[0][0][4:].decode("utf-8") == '':
                     return f"No data available for user '{username}'", 404
