@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 from subprocess import Popen, PIPE
-from typing import Tuple
 from sqlalchemy import text
-from colorama import Fore
 
 class SQLeet():
     def __init__(self, exec_path: str, db_name: str, pw: str):
@@ -29,13 +27,3 @@ class SQLeet():
         query = text(query).text.encode()
         ret = self.proc.communicate(query)     
         return (ret, self.proc.returncode)
-    
-    def parse_result():
-        # TODO: Maybe implemented later, maybe not...
-        pass
-
-# S = SQLeet("sqleet-master/sqleet", "customers.db", pw="""secret""") #';"; whoami; echo "'""")
-# data = S.run("""SELECT email FROM customers WHERE role="admin";""")
-# print(data)
-
-# TODO: Change bcrypt to sha1 or sth similar
