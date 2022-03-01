@@ -15,9 +15,9 @@ from reportlab.graphics import renderPM
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.urandom(31)
 app.config["DB"] = "/opt/DarknetStore/Interface/customers.db"
-# TODO: Change for production
+app.config["HOST"] = "0.0.0.0"
+app.config["PORT"] = 80
 app.config["MAIL_DIR"] = "/home/pi/Mails"
-app.debug = True
 app.jinja_env.filters['zip'] = zip
 
 def connect2db() -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
@@ -109,8 +109,6 @@ def GET_wp_data():
 
 @app.route("/wp-data/mails", methods=["GET"])
 def GET_wp_data_mails():
-    # TODO: Change Maildir for production!
-    # May work with ENV_VARS
     emails = os.listdir(app.config["MAIL_DIR"])
     return render_template("emails.html", emails=emails)
 
@@ -190,4 +188,4 @@ def POST_upload_contract():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host=app.config["HOST"], port=app.config["PORT"])
