@@ -7,7 +7,7 @@ We're cooperating with popular groups and we've granted a price for the best use
 
 We take personal information very serious!¡! Therefore our customer database is зашифрованный with very strong algorithms and may take a little longer to respond to your requests.
 
-Unfortunately, we discovered together with the the DDOS Team (Dangerous Docker Original Security) a security hole in our SQL Crypto Wrapper. You can find the related files at /opt/.
+Unfortunately, we discovered together with the the DDOS Team (Dangerous Docker Original Security) a security hole in our SQL Crypto Wrapper (sqleet.py with class SQLeet wraps [sqleet](https://github.com/resilar/sqleet)). You can find the related files at /opt/.
 
 One of our former students has **not** parsed the output from the Keyring into the SQL Crypto Wrapper correctly. Thus, it was possible to change the password in the keyring to a specific payload. If done right, the payload was executed with superuser permissions.
 
