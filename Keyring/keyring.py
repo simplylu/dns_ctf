@@ -41,8 +41,9 @@ def help():
 
 
 def connect_to_keyring() -> SQLeet:
-    return SQLeet(os.path.join(os.environ["SQLEET"], "sqleet"), os.path.join(os.environ["KEYRING"], "keyring.db"), "~^.m)wuit8I3oA)Z<cOS/m0U[;N7HRwbAs.UNW7/")
-
+    sqleet = os.path.join("/opt/sqleet", "sqleet")
+    db = os.path.join("/opt/Keyring", "keyring.db")
+    return SQLeet(sqleet, db, "~^.m)wuit8I3oA)Z<cOS/m0U[;N7HRwbAs.UNW7/")
 
 def check_root():
     if getuid() != 0:
@@ -60,7 +61,6 @@ def set_pw(key: str, name: str, pw: str = None):
     if code == 0:
         print(ret[0].decode())
     else:
-        del S
         S = connect_to_keyring()
         ret, code = S.run(f"""UPDATE keys SET pw='{pw}' WHERE key='{key}';""")
         if code == 0:
@@ -71,7 +71,8 @@ def set_pw(key: str, name: str, pw: str = None):
 
 
 def get_pw(key: str, name: str):
-    check_root()
+    # Removed, as the user can now receive a flag from system.flag
+    # check_root()
     S = connect_to_keyring()
     key = f"{key}.{name}"
     ret, _ = S.run(f"""SELECT pw FROM keys WHERE key="{key}";""")
@@ -91,8 +92,6 @@ def del_pw(key: str, name: str):
     if code == 0:
         print(f"Successfully deleted password for '{name}' in '{key}'")
     sys.exit(0)
-
-# a';"; cat /etc/passwd; echo "'
 
 try:
     if sys.argv[1] == "set":
@@ -120,4 +119,5 @@ try:
     else:
         help()
 except Exception as e:
+    pass
     help()
