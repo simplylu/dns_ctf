@@ -13,9 +13,21 @@ DNS is our DarknetShop. It consists of two parts. The customer portal and the ad
 ```sh
 git clone https://github.com/js-on/dns_ctf.git
 cd dns_ctf
+# Build container and give it the name "dns_ctf"
 docker build . -t dns_ctf
+# docker image ls should output
+# REPOSITORY        TAG           IMAGE ID       CREATED              SIZE
+# dns_ctf           latest        a665a8ce39b4   About a minute ago   1.12GB
+# Run container in interactive mode (to enable dns_ctf shell)
 docker run -it dns_ctf /bin/bash
 
 # See hints after startup!
 ```
 ![View after startup](https://md.js-on.de/uploads/upload_c092ec3138e25f825d4dc2befd8bb087.png)
+
+### Troubleshooting
+#### Too many authentication failures
+This is a common issue when using SSH. Add `-o PreferredAuthentications=password` behind your SSH command and it should work.
+#### Failed to export image
+If you get the following error, don't worry, just rerun the build command and it should restart the build where it has stopped.
+`failed to export image: failed to create image: failed to get layer sha256:[0-9a-f]{64}: layer does not exist`
