@@ -150,5 +150,4 @@ def search():
         return index(msg="Error, will be fixed soon", dberror={"stdout": res[0], "stderr": res[1]})
 
 if __name__ == "__main__":
-    # TODO: While loop here or in bash starter?
     app.run(host=app.config["HOST"], port=app.config["PORT"])

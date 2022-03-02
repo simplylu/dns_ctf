@@ -5,7 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Interface</title>
+    <title>Admin Panel</title>
+    <script>
+        (function are_cookies_enabled() {
+            let cookieEnabled = (navigator.cookieEnabled) ? true : false;
+            if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled) {
+                document.cookie = "testcookie";
+                cookieEnabled = (document.cookie.indexOf("testcookie") != -1) ? true : false;
+            }
+            if (!cookieEnabled) {
+                alert("Please enable cookies, otherwise the search won't work!");
+            }
+        })();
+    </script>
 </head>
 
 <body>
