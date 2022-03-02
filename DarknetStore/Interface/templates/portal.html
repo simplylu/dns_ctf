@@ -1,175 +1,404 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D4rkn3tSt0r3</title>
+    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='img/haxxor.png') }}" type="image/png" />
 
-    <title>H4ckSt0r3</title>
-
-    <script src="{{ url_for('static', filename='js/prodbs.js') }}"></script>
-    <link href="{{ url_for('static', filename='css/portal.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}" />
-
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/all.ognvlnjrijcg.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/portal.css') }}" />
 </head>
 
-<body>
+<body id="home" class="">
+    <canvas id="canv"></canvas>
+    <script src="{{ url_for('static', filename='js/matrix.js') }}"></script>
+    <div class="canv_container">
+        <header id="site-header">
 
-    <div class="container">
-        <div class="header"><a href="#">
-                <h1 style="color: white">H4ckSt0r3</h1>
-            </a>
+            <div class="j-liberty-wrapper l-page-wrapper align-center">
+                <div data-liberty-position-name="home-above-header" data-liberty-parent-selector=".j-liberty-wrapper"
+                    class="a-collapsed l-container"></div>
+            </div>
+            <section id="site-header-top" class="l-page-wrapper">
+                <div id="site-logo">
+                    <div class="logo">
+                        <a href="/">
+                            <img height="40" src="{{ url_for('static', filename='img/haxxor.png') }}"
+                                alt="D4rkn3tSt0r3"></a><br>
+                        <span id="site-logo-claim" class="headline-small">The darker, the better. <b
+                                style="color: red;">0x000000</b></span>
+                    </div>
+                </div>
+                <section id="site-signin" class="is-centered-button">
+                    <nav>
+                        <ul class="linklist flex-row-vertical-center">
+                            {% if userid %}
+                            <li><a class="button-secondary" data-gaevent="Homepage,UserRegistrationBegin"
+                                    href="/settings?user={{ userid }}">S3tt1ngs</a>
+                            </li>
+                            <li></li>
+                            <li>
+                                <a class="button" data-gaevent="Homepage,LoginBegin" href="/logout">
+                                    <i class="button-icon button-icon-medium icon-my-white"></i><span>S1gn
+                                        0ut</span></a>
+                            </li>
+                            {% if role == "admin" %}
+                                <li>
+                                    <!-- This is intentionally broken, you need to fix it! -->
+                                    <a class="button" data-gaevent="Homepage,LoginBegin" onclick="`http:\/\/${document.location.href.split('/')[2]}:81/`">
+                                        <i class="button-icon button-icon-medium icon-my-white"></i><span>Admin Panel</span></a>
+                                </li>
+                            {% endif %}
+                            {% else %}
+                            <li>
+                                <a class="button" data-gaevent="Homepage,LoginBegin" href="/login">
+                                    <i class="button-icon button-icon-medium icon-my-white"></i><span>S1gn 1n</span></a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </section>
+            </section>
+
+            <section id="site-searchbar" class="a-green bar">
+                <div class="bar-inner l-page-wrapper">
+                    <div class="l-row">
+                        <div class="a-span-17 l-col">
+                            <div id="site-search">
+                                <form id="site-search-form">
+                                    <div class="l-row">
+                                        <div class="a-span-10 l-col">
+                                            <div id="site-search-what" class="splitfield">
+
+                                                <div class="splitfield-left">
+                                                    <!-- SuggestionWidget  start -->
+                                                    <div id="site-search-query-wrp" class="suggestionbox "
+                                                        data-suggest=""> <input type="text" id="site-search-query"
+                                                            class="splitfield-input is-not-clearable" name="keywords"
+                                                            tabindex="1" title="" placeholder="Enter haxxxx!" value=""
+                                                            autofocus />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="a-span-4 l-col">
+                                            <button id="site-search-submit" class="button button-overgreen button-small"
+                                                type="submit">
+                                                <i class="button-icon  icon-magnifier-white button-icon-medium"></i>
+                                                <span>S34rch</span>
+                                            </button>
+                                        </div>
+                                        <div class="a-span-10 l-col">
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="sortingField" value="SORTING_DATE"
+                                        id="search-sorting-field" />
+                                    <input type="hidden" id="search-adType-field" name="adType" value="" />
+                                    <input type="hidden" id="search-posterType-field" name="posterType" value="" />
+                                    <input type="hidden" id="search-pageNum" name="pageNum" value="1" />
+                                    <input type="hidden" id="search-action" name="action" value="find" />
+                                    <input type="hidden" name="maxPrice" value="" />
+                                    <input type="hidden" name="minPrice" value="" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </header>
+        <div class="site-base">
+            <div class="site-base--left-banner">
+                <div class="site-base--left-banner--full">
+                    <div id="banner-skyscraper-left" class="sticky-advertisement">
+                        <div data-liberty-position-name="home-sky-atf-left" class="l-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="site-base--content">
+                <div id="site-content" class="l-page-wrapper l-container-row  ">
+                    <section class="l-homepage-navigation-col">
+                        <section id="home-ctgrs" class="l-container-row contentbox">
+
+                            <header class="boxheader-nomarginbottom splitheader">
+                                <h3 class="splitheader--title">C4t3g0r13s</h3>
+                            </header>
+                            <div class="no-padding clearfix position-relative">
+                                <ul id="home-ul-ctgrs" class="itemlist-padded treelist">
+                                    <li class="">
+                                        <a class="text-link-secondary treelist-headline">
+                                            Cyb3r</a>
+                                        <ul>
+                                            <li>
+                                                <a class="text-link-secondary">
+                                                    DDos</a>
+                                            </li>
+                                            <li>
+                                                <a class="text-link-secondary">
+                                                    Malware as a Service</a>
+                                            </li>
+                                            <li>
+                                                <a class="text-link-secondary">
+                                                    Custom Hacking</a>
+                                            </li>
+
+                                            <li class="p-home-li-subctgrs-more">
+                                                <a>More ...</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="browseitem-highlighted-immobilien">
+                                        <a class="text-link-secondary treelist-headline">
+                                            Drugs</a>
+                                        <ul>
+                                            <li>
+                                                <a class="text-link-secondary">
+                                                    C<sub>21</sub>H<sub>23</sub>NO<sub>5</sub> </a>
+                                            </li>
+                                            <li>
+                                                <a class="text-link-secondary">
+                                                    <sub>17</sub>HC<sub>21</sub>NO<sub>4</sub></a>
+                                            </li>
+                                            <li>
+                                                <a class="text-link-secondary">
+                                                    C<sub>20</sub>H<sub>25</sub>N<sub>3</sub>O</a>
+                                            </li>
+                                            <li class="p-home-li-subctgrs-more">
+                                                <a>More ...</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="">
+                                        <a class="text-link-secondary treelist-headline">
+                                            Other</a>
+                                        <ul>
+                                            <li>
+                                                <a class="text-link-secondary">
+                                                    Weapons
+                                            </li>
+                                            <li>
+                                                <a class="text-link-secondary">
+                                                    Gadgets
+                                            </li>
+                                            <li>
+                                                <a class="text-link-secondary">
+                                                    Unspecified
+                                            </li>
+                                            <li class="p-home-li-subctgrs-more">
+                                                <a>More ...</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+
+                    <section id="home-cntnt" class="l-homepage-content-col">
+
+                        <div id="home-hpgallery-info" class="modal-dialog mfp-popup-huge mfp-hide">
+                            <header>
+                            </header>
+                            <section class="modal-dialog-content">
+                            </section>
+                        </div>
+                        <section class="a-double-margin l-container-row tilesbox-featured carousel" id="home-gallery">
+                            <header class="tilesbox--header splitheader-centered">
+                                <h2 class="splitheader--title text-title-4">SH1T</h2>
+                                <div class="splitheader--addon">
+                                    <button class="button-browse-previous" id="home-gllry-prev" title="zurück"></button>
+                                    <button class="button-browse-next" id="home-gllry-next" title="weiter"></button>
+                                </div>
+                            </header>
+
+                            <div class="carousel-viewport">
+                                <ul class="carousel-list">
+                                    <li class="itemtile-condensed" data-page="389">
+                                        <a
+                                            data-gaevent="Homepage,GalleryVIPClick" data-gaevent-direct="true">
+                                            <div class="itemtile-header">
+                                                <img alt=""
+                                                    src="{{ url_for('static', filename='img/lan-turtle.jpg') }}"
+                                                >
+                                            </div>
+                                            <div class="itemtile-body">
+                                                <h3 class="itemtile-title">
+                                                    Lan Turtle</h3>
+                                                <div class="itemtile-location">
+                                                    @Cliff_the_Captcha</div>
+                                                    <div class="itemtile-ribbon"><span class="itemtile-price">0.0005 BTC</span>
+                                                    </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="itemtile-condensed" data-page="389">
+                                        <a
+                                            data-gaevent="Homepage,GalleryVIPClick" data-gaevent-direct="true">
+                                            <div class="itemtile-header">
+                                                <img alt=""
+                                                    src="{{ url_for('static', filename='img/mask.jpg') }}"
+                                                >
+                                            </div>
+                                            <div class="itemtile-body">
+                                                <h3 class="itemtile-title">
+                                                    Guy Fawkes mask</h3>
+                                                <div class="itemtile-location">
+                                                    @the_dark_milana</div>
+                                                    <div class="itemtile-ribbon"><span class="itemtile-price">0.0000042 BTC</span>
+                                                    </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="itemtile-condensed" data-page="389">
+                                        <a
+                                            data-gaevent="Homepage,GalleryVIPClick" data-gaevent-direct="true">
+                                            <div class="itemtile-header">
+                                                <img alt=""
+                                                    src="{{ url_for('static', filename='img/rubber_ducky.jpg') }}"
+                                                >
+                                            </div>
+                                            <div class="itemtile-body">
+                                                <h3 class="itemtile-title">
+                                                    Rubber Ducky</h3>
+                                                <div class="itemtile-location">
+                                                    @Sophus_the_SCAMMER</div>
+                                                    <div class="itemtile-ribbon"><span class="itemtile-price">0.0001337 BTC</span>
+                                                    </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="itemtile-condensed" data-page="389">
+                                        <a
+                                            data-gaevent="Homepage,GalleryVIPClick" data-gaevent-direct="true">
+                                            <div class="itemtile-header">
+                                                <img alt=""
+                                                    src="{{ url_for('static', filename='img/packet_squirrel.jpg') }}"
+                                                >
+                                            </div>
+                                            <div class="itemtile-body">
+                                                <h3 class="itemtile-title">
+                                                    Packet Squirrel</h3>
+                                                <div class="itemtile-location">
+                                                    @CyberMuffin</div>
+                                                    <div class="itemtile-ribbon"><span class="itemtile-price">0.0005 BTC</span>
+                                                    </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section id="home-ads" class="a-double-margin l-container-row" style="background-color: rgba(0, 0, 0, 0.85);">
+                            {% if userid %}
+                                <li class="itemtile-condensed">
+                                    <p style="color: cyan;">Upload your darknetstore request as PS file</p>
+                                    <form action="/upload_contract" method="POST" enctype="multipart/form-data">
+                                        <input type="file" name="file" style="color: white;">
+                                        <input type="submit" value="Upload" style="color: white; background-color: transparent; border: none;"></a>
+                                    </form>
+                                </li>
+                            {% endif %}
+                        </section>
+
+                        <section id="store-gallery" class="a-double-margin l-container-row tilesbox">
+                            <header class="tilesbox--header splitheader">
+                                <h2 class="splitheader--title text-title-4">Popular Providers</h2>
+                                <a class="splitheader--addon" href="#" data-gaevent="Homepage,BusinessPagesWidgetClick"
+                                    data-gaevent-direct="true">
+                                    Sh0w 4ll</a>
+                            </header>
+
+                            <ul id="home-gallery-list-shops" class="tilelist">
+                                <li class="itemtile-condensed">
+                                    <a href="#" data-gaevent="Homepage,BusinessPagesWidgetClick"
+                                        data-gaevent-direct="true">
+                                        <div class="itemtile-header">
+                                            <img alt="" src="{{ url_for('static', filename='img/haxxor.png') }}" />
+                                        </div>
+                                        <div class="itemtile-body">
+                                            <h3 class="itemtile-title">
+                                                Conti</h3>
+                                            <div class="itemtile-location">
+                                                127.0.0.1</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="itemtile-condensed">
+                                    <a href="#" data-gaevent="Homepage,BusinessPagesWidgetClick"
+                                        data-gaevent-direct="true">
+                                        <div class="itemtile-header">
+                                            <img alt="" src="{{ url_for('static', filename='img/haxxor.png') }}" />
+                                        </div>
+                                        <div class="itemtile-body">
+                                            <h3 class="itemtile-title">
+                                                Emotet</h3>
+                                            <div class="itemtile-location">
+                                                127.0.0.2</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="itemtile-condensed">
+                                    <a href="#" data-gaevent="Homepage,BusinessPagesWidgetClick"
+                                        data-gaevent-direct="true">
+                                        <div class="itemtile-header">
+                                            <img alt="" src="{{ url_for('static', filename='img/haxxor.png') }}" />
+                                        </div>
+                                        <div class="itemtile-body">
+                                            <h3 class="itemtile-title">
+                                                Fancy Bear</h3>
+                                            <div class="itemtile-location">
+                                                127.0.0.3</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="itemtile-condensed">
+                                    <a href="#" data-gaevent="Homepage,BusinessPagesWidgetClick"
+                                        data-gaevent-direct="true">
+                                        <div class="itemtile-header">
+                                            <img alt="" src="{{ url_for('static', filename='img/haxxor.png') }}" />
+                                        </div>
+                                        <div class="itemtile-body">
+                                            <h3 class="itemtile-title">
+                                                Sandworm</h3>
+                                            <div class="itemtile-location">
+                                                127.0.0.4</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+                    </section>
+                    <div id="srp-btf-billboard" class="flex-right">
+                    </div>
+                </div>
+
+                <footer id="site-footer" class="l-page-wrapper align-center">
+                    <nav id="site-footer-nav">
+                    </nav>
+
+                    <p class="text-light">
+                        <small>
+                            Copyright ©2017- Administrator@darknetstore.onion</small>
+                    </p>
+
+                    <nav id="site-footer-tbs" class="tabnav-tiny tinytabs">
+                    </nav>
+                </footer>
+
+
+
+            </div>
+            <div class="site-base--right-banner">
+                <div class="site-base--right-banner--full">
+                    <div id="banner-skyscraper" class="sticky-advertisement">
+                        <div data-liberty-position-name="home-sky-atf-right" class="l-container"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="button">
-            <button id="btn001" type="button" onclick="document.location.href = '/login';">Sign In!</button>
-            <button id="btn002" type="button" class="fas fa-shopping-cart fa-2x"></button>
-        </div>
-
-        <div class="content">
-            <h2>Products</h2>
-        </div>
-
-        <!-------- products --------------->
-        <section class="products">
-
-            <div class="pcard">
-                <img src="{{ url_for('static', filename='img/rubber_ducky.jpg') }}" class="primg0" alt="unavailable">
-                <div class="product-info">
-                    <h1>
-                        <script>document.write(prodb[0].pname);</script>
-                    </h1>
-                    <p class="price" id="price0">
-                        <script>document.write(prodb[0].price);</script>$
-                    </p>
-                </div>
-                <p>
-                <form class="pform">
-                    <label for="quantity">Enter Quantity:</label><br />
-                    <input type="number" id="quantity0" name="quantity" min="1" max="5" onchange="instantPrice0()">
-                    <script>
-                        function instantPrice0() {
-                            var quantvar0 = document.getElementById("quantity0");
-                            var quantmp0 = quantvar0.value;
-                            var newPrice0 = quantmp0 * (prodb[0].price);
-                            var priceout0 = document.getElementById("price0");
-                            priceout0.innerHTML = newPrice0 + "$";
-
-                        }
-                    </script>
-                    <input class="pbutton" type="submit" value="Add to Cart">
-                </form>
-                </p> <br /> <br />
-            </div>
-            <hr>
-
-            <div class="pcard">
-
-                <img ssrc="{{ url_for('static', filename='img/packet_squirrel.jpg') }}" class="primg0" alt="unavailable">
-                <div class="product-info">
-                    <h1 class="producttitle">
-                        <script>document.write(prodb[1].pname);</script>
-                    </h1>
-                    <p class="price" id="price1">
-                        <script>document.write(prodb[1].price);</script>$
-                    </p>
-                    <!-----start rating----->
-                    <span class="rating" data-default-rating="3.5"></span>
-                    <!-----end rating----->
-                </div>
-                <p>
-                <form class="pform">
-                    <label for="quantity">Enter Quantity:</label><br />
-                    <input type="number" id="quantity1" name="quantity" min="1" max="5" onchange="instantPrice1()">
-                    <script>
-                        function instantPrice1() {
-                            var quantvar1 = document.getElementById("quantity1");
-                            var quantmp1 = quantvar1.value;
-                            var newPrice1 = quantmp1 * (prodb[1].price);
-                            var priceout1 = document.getElementById("price1");
-                            priceout1.innerHTML = newPrice1 + "$";
-
-                        }
-                    </script>
-                    <input class="pbutton" type="submit" value="Add to Cart">
-                </form>
-                </p>
-            </div>
-            <hr>
-
-
-            <div class="pcard">
-
-
-                <img src="{{ url_for('static', filename='img/lan-turtle.jpg') }}" class="primg0" alt="unavailable">
-                <div class="product-info">
-                    <h1>
-                        <script>document.write(prodb[2].pname);</script>
-                    </h1>
-                    <p class="price" id="price2">
-                        <script>document.write(prodb[2].price);</script>$
-                    </p>
-
-                    <!-----start rating----->
-                    <span class="rating" data-default-rating="4"></span>
-                    <!-----end rating----->
-                </div>
-                <p>
-                <form class="pform">
-                    <label for="quantity">Enter Quantity:</label><br />
-                    <input type="number" id="quantity2" name="quantity" min="1" max="5" onchange="instantPrice2()">
-                    <script>
-                        function instantPrice2() {
-                            var quantvar2 = document.getElementById("quantity2");
-                            var quantmp2 = quantvar2.value;
-                            var newPrice2 = quantmp2 * (prodb[2].price);
-                            var priceout2 = document.getElementById("price2");
-                            priceout2.innerHTML = newPrice2 + "$";
-
-                        }
-                    </script>
-                    <input class="pbutton" type="submit" value="Add to Cart">
-                </form>
-                </p>
-            </div>
-
-            <hr>
-            <div class="pcard">
-
-                <img src="{{ url_for('static', filename='img/mask.jpg') }}" class="primg0" alt="unavailable">
-                <div class="product-info">
-                    <h1>
-                        <script>document.write(prodb[3].pname);</script>
-                    </h1>
-                    </h1>
-                    <p class="price" id="price3">
-                        <script>document.write(prodb[3].price);</script>$
-                    </p>
-
-                </div>
-                <p>
-                <form class="pform">
-                    <label for="quantity">Enter Quantity:</label><br />
-                    <input type="number" id="quantity3" name="quantity" min="1" max="5" onchange="instantPrice3()">
-                    <script>
-                        function instantPrice3() {
-                            var quantvar3 = document.getElementById("quantity3");
-                            var quantmp3 = quantvar3.value;
-                            var newPrice3 = quantmp3 * (prodb[3].price);
-                            var priceout3 = document.getElementById("price3");
-                            priceout3.innerHTML = newPrice3 + "$";
-
-                        }
-                    </script>
-                    <input class="pbutton" type="submit" value="Add to Cart">
-                </form>
-                </p>
-            </div>
-            <hr>
-        </section>
-        <br>
-        <!------- End Products-------->
-
     </div>
 </body>
 

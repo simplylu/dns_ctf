@@ -40,15 +40,12 @@ ALLOWED_QUERIES = ["logic", "firstname", "surname", "username", "email", "city",
 
 @app.route("/", methods=["GET"])
 def index():
-    if is_authorized():
-        return render_template("portal.html", role=session["role"], userid=session["userid"])
-    else:
-        return render_template("login.html")
+    return render_template("portal.html", role=session.get("role", None), userid=session.get("userid", None))
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if is_authorized():
-        return index()
+        return render_template("portal.html", role=session.get("role", None), userid=session.get("userid", None))
     if request.method == "POST":
         try:
             username = request.form.get("username")
@@ -61,11 +58,12 @@ def login():
             session["active"] = True
             session["role"] = "admin"
             session["userid"] = base64.b32encode("Administrator".encode()).decode()
-            return index()
+            return render_template("portal.html", role=session.get("role", None), userid=session.get("userid", None))
         elif username == "Armida.Strauss" and password == "THURASOE07":
             session["active"] = True
             session["role"] = "user"
             session["userid"] = base64.b32encode("Armida.Strauss".encode()).decode()
+            return render_template("portal.html", role=session.get("role", None), userid=session.get("userid", None))
     else:
         return render_template("login.html", msg="invalid request method"), 401
 
@@ -74,14 +72,27 @@ def logout():
     session["active"] = False
     session["role"] = ""
     session["userid"] = ""
-    return login()
+    return render_template("portal.html", role=session.get("role", None), userid=session.get("userid", None))
 
-@app.route("/wp-data", methods=["GET"])
+@app.route("/wp-content", methods=["GET"])
 def GET_wp_data():
     return "Don't you dare to go even further!!!", 451
 
-@app.route("/wp-data/mails", methods=["GET"])
+@app.route("/wp-contents", methods=["GET"])
+def GET_wp_datas():
+    return "Don't you dare to go even further!!!", 451
+
+@app.route("/wp-<string>", methods=["GET"])
+def GET_wp_anything(string: str):
+    return f"No <b>content</b> here at /wp-{string}"
+
+@app.route("/wp-content/mails", methods=["GET"])
 def GET_wp_data_mails():
+    emails = os.listdir(app.config["MAIL_DIR"])
+    return render_template("emails.html", emails=emails)
+
+@app.route("/wp-content/emails", methods=["GET"])
+def GET_wp_data_emails():
     emails = os.listdir(app.config["MAIL_DIR"])
     return render_template("emails.html", emails=emails)
 
@@ -89,6 +100,14 @@ def GET_wp_data_mails():
 def GET_email(mail: str):
     print("MAIL:", mail)
     return open(app.config["MAIL_DIR"] + "/" + mail, 'r').read()
+
+@app.route("/thereIsNoWayThat-You-CanBeThere/")
+def GET_tinwtycbts():
+    return "Great job, <a href='/wp-content'>this</a> is your reward!"
+
+@app.route("/thereIsNoWayThat-You-CanBeThere")
+def GET_tinwtycbt():
+    return "Great job, <a href='/wp-content'>this</a> is your reward!"
 
 @app.route("/settings", methods=["GET", "POST"])
 def settings():
@@ -136,7 +155,6 @@ def POST_upload_profile():
 
 @app.route("/upload_contract", methods=["POST"])
 def POST_upload_contract():
-    # TODO: Check if working
     if not is_authorized():
         return login()
     if len(list(request.files.keys())) == 0:
