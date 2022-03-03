@@ -9,6 +9,9 @@ DNS is our DarknetShop. It consists of two parts. The customer portal and the ad
 - Don't look into the code of the Dockerfile. It is cheating!
 - Don't look into the code of post_installation.sh. It is, again, cheating!
 
+### Flags
+There are 7 flags hidden all over the system. They all have the format ITS{...} or its_..._
+
 ### Installation
 ```sh
 git clone https://github.com/js-on/dns_ctf.git
