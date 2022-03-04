@@ -22,7 +22,7 @@ restart() {
 }
 info() {
     echo "\n==Usage=="
-    echo "  - \e[1;39mhelp\e[0m: Prints this page"
+    echo "  - \e[1;39minfo\e[0m: Prints this page"
     echo "  - \e[1;39mrestart\e[0m: Restarts both flask servers"
     echo "  - \e[1;39mflags\e[0m: Get challenge information"
     echo "  - \e[1;39mquit\e[0m: Exit the Container"
@@ -103,7 +103,7 @@ do
             echo -n "[noob@dns_ctf /]$ "
         ;;
         *)
-            echo "[!] Only commands [\e[1;31mrestart\e[0m|\e[1;31mquit\e[0m|\e[1;31mhelp\e[0m|\e[1;31mflags\e[0m] are available\n    This is \e[1;39mNOT\e[0m part of the CTF"
+            echo "[!] Only commands [\e[1;31mrestart\e[0m|\e[1;31mquit\e[0m|\e[1;31minfo\e[0m|\e[1;31mflags\e[0m] are available\n    This is \e[1;39mNOT\e[0m part of the CTF"
             echo -n "[noob@dns_ctf /]$ "
         ;;
     esac
