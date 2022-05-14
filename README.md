@@ -1,6 +1,6 @@
 DarknetStore CTF
 ===
-![Screenshot of the Customer Panel](https://md.js-on.de/uploads/upload_168757b64b049e5209c2c9929208299a.png)
+![Screenshot of the Customer Panel](store.png)
 ### DNS CTF
 DNS is our DarknetShop. It consists of two parts. The customer portal and the admin panel. Your goal is to hack the container and find all the flags using only the knowledge of the IP address and the methods you've learned during your studies. In some cases, there are several ways to get to the flag, so a flag can have two different levels of difficulty, depending on the way chosen. With the exception of URL fuzzing and some password cracking, no bruteforce needs to be applied.
 
@@ -8,9 +8,6 @@ DNS is our DarknetShop. It consists of two parts. The customer portal and the ad
 - Don't look into the code of this GitHub Repo. It is cheating!
 - Don't look into the code of the Dockerfile. It is cheating!
 - Don't look into the code of post_installation.sh. It is, again, cheating!
-
-### Flags
-There are 7 flags hidden all over the system. They all have the format ITS{...} or its_..._
 
 ### Installation
 ```sh
@@ -26,7 +23,7 @@ docker run -it dns_ctf /bin/bash
 
 # See hints after startup!
 ```
-![View after startup](https://md.js-on.de/uploads/upload_c092ec3138e25f825d4dc2befd8bb087.png)
+![View after startup](start.png)
 
 ### Troubleshooting
 #### Too many authentication failures
